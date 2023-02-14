@@ -15,12 +15,16 @@ const defaultFormFieldds = {
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFieldds);
     const { email, password } = formFields;
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormFields({...formFields, [name]: value});
     }
     const resetFormFields = () => {
         setFormFields(defaultFormFieldds);
+    }
+    const signInWithGoogle = async () => {
+        await signInWithGooglePopup()
     }
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -39,12 +43,6 @@ const SignInForm = () => {
                     console.log("user signin encountered an error", error);
             }
         }
-    }
-
-    const logGoogleUser = async () => {
-        const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
-        console.log(userDocRef);
     }
 
     useEffect(() => {
@@ -66,7 +64,7 @@ const SignInForm = () => {
                 <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password} />
                 <div className="buttons-container" >
                     <Button type="submit">Sign in</Button>
-                    <Button buttonType="google" type="button" onClick={logGoogleUser}>Google Sign in</Button>
+                    <Button buttonType="google" type="button" onClick={signInWithGoogle}>Google Sign in</Button>
                 </div>
                 <button onClick={signInWithGoogleRedirect}>Sign in with Google Redirect</button>
             </form>
