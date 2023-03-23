@@ -3,7 +3,7 @@ import { auth, signInWithGooglePopup, signInWithGoogleRedirect, createAuthUserWi
 import { getRedirectResult, signInWithEmailAndPassword } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import './sign-in-form.styles.scss'
-import Button from "../button/button.component";
+import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 
 const defaultFormFieldds = {
     displayName: '',
@@ -64,7 +64,7 @@ const SignInForm = () => {
                 <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password} />
                 <div className="buttons-container" >
                     <Button type="submit">Sign in</Button>
-                    <Button buttonType="google" type="button" onClick={signInWithGoogle}>Google Sign in</Button>
+                    <Button buttonType={BUTTON_TYPE_CLASSES.google} type="button" onClick={signInWithGoogle}>Google Sign in</Button>
                 </div>
                 <button onClick={signInWithGoogleRedirect}>Sign in with Google Redirect</button>
             </form>
